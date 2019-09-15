@@ -8,10 +8,11 @@ provider:
     NOTIFY_REDIRECT_URI: "your notify redirect_uri"
     NOTIFY_CLIENT_ID: "client id"
     NOTIFY_CLIENT_SECRET: "client secret"
+    SQS_REGION: "SQS region"
     PG_DB: "your main db"
-    PG_HOST: "database host"
-    PG_NAME: "database account"
-    PG_PWD: "database password"
+    PG_HOST: "rds host"
+    PG_NAME: "rds account"
+    PG_PWD: "rds password"
     PG_PORT: "database port"
 functions:
   api:
