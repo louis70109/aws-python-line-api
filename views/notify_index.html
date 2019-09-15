@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Link Notify</title>
+  </head>
+  <body>
+    <button onclick="Auth();">點選這裡連結到LineNotify</button>
+
+    <script>
+      function Auth() {
+        var URL = "https://notify-bot.line.me/oauth/authorize?";
+        URL += "response_type=code";
+        URL += "&client_id=YOUR_CLIENT_ID";
+        URL += "&redirect_uri=YOUR_REDIRECT_URI";
+        URL += "&scope=notify";
+        URL += "&state=nostate";
+        window.location.href = URL;
+      }
+    </script>
+  </body>
+</html>

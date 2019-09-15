@@ -1,0 +1,29 @@
+service: aws-python-line-api
+provider:
+  name: aws
+  runtime: python3.7
+  region: us-east-2
+  stage: dev
+  environment:
+    NOTIFY_REDIRECT_URI: "your notify redirect_uri"
+    NOTIFY_CLIENT_ID: "client id"
+    NOTIFY_CLIENT_SECRET: "client secret"
+    PG_DB: "your main db"
+    PG_HOST: "database host"
+    PG_NAME: "database account"
+    PG_PWD: "database password"
+    PG_PORT: "database port"
+functions:
+  api:
+    handler: wsgi_handler.handler
+    events:
+      - http: ANY /
+      - http: ANY {proxy+}
+custom:
+  wsgi:
+    app: api.app
+  pythonRequirements:
+    dockerizePip: true
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi

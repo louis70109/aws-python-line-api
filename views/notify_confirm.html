@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>message check</title>
+  </head>
+  <body>
+    verify messate:
+    <div class="message"></div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var notify_code = urlParams.get("code");
+    var state = urlParams.get("state");
+    $(function() {
+      $.ajax({
+        url: "https://SLS_URI.execute-api.us-east-2.amazonaws.com/dev/notify",
+        type: "POST",
+        dataType: "json",
+        data: { code: notify_code },
+        success: function(response) {
+          console.log(response);
+          $(".message").text(response["access_token"]);
+        },
+        error: function(xhr) {
+          console.log(xhr);
+          alert("Ajax request 發生錯誤");
+        }
+      });
+    });
+  </script>
+</html>
