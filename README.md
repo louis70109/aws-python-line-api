@@ -37,7 +37,25 @@ $ serverless install --url https://github.com/louis70109/aws-python-line-notify-
 $ cd <YOUR_FILE_NAME>/
 ```
 
-4. Deploy the webhhok function
+4. create a `.env` file and write your key in this file
+
+```
+NOTIFY_REDIRECT_URI=
+NOTIFY_CLIENT_ID=
+NOTIFY_CLIENT_SECRET=
+REGION=us-east-2
+SQS_URL=
+SQS_ARN=
+PG_DB=
+PG_HOST=
+PG_NAME=
+PG_PWD=
+PG_PORT=
+LINE_CHANNEL_TOKEN=
+LINE_CHANNEL_SECRET_KEY=
+```
+
+5. Deploy the webhook function
 
 ```bash=
 npm install
