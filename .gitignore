@@ -18,3 +18,5 @@ node_modules/
 __pycache__
 # Serverless directories
 .serverless
+serverless.yml
+.env

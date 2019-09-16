@@ -11,11 +11,11 @@ class Database():
 
     def connect(self):
         conn = psycopg2.connect(
-            database=os.environ("PG_DB"),
-            user=os.environ("PG_NAME"),
-            password=os.environ("PG_PWD"),
-            host=os.environ("PG_HOST"),
-            port=os.environ("PG_PORT")
+            database=os.getenv("PG_DB"),
+            user=os.getenv("PG_NAME"),
+            password=os.getenv("PG_PWD"),
+            host=os.getenv("PG_HOST"),
+            port=os.getenv("PG_PORT"),
         )
         self.conns.append(conn)
 

@@ -2,7 +2,7 @@ import json
 import requests
 
 
-def webhook(event, context):
+def line_notify_handler(event, context):
     print(event)
     body = json.loads(event['Records'][0]['body'])
     print(body)

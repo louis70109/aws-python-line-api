@@ -4,3 +4,5 @@ Flask-Cors==3.0.6
 requests==2.22.0
 psycopg2-binary==2.8.3
 boto3==1.9.189
+python-dotenv==0.10.3
+line-bot-sdk==1.12.1

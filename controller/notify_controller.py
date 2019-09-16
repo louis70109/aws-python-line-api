@@ -37,9 +37,9 @@ class NotifyController(Resource):
         # LINE notify json data
         client = {
             'grant_type': 'authorization_code', 'code': code,
-            'redirect_uri': os.environ["NOTIFY_REDIRECT_URI"],
-            'client_id': os.environ["NOTIFY_CLIENT_ID"],
-            'client_secret': os.environ["NOTIFY_CLIENT_SECRET"]
+            'redirect_uri': os.getenv("NOTIFY_REDIRECT_URI"),
+            'client_id': os.getenv("NOTIFY_CLIENT_ID"),
+            'client_secret': os.getenv("NOTIFY_CLIENT_SECRET")
         }
         # send request to auth
         r = requests.post(
