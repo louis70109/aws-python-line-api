@@ -83,20 +83,6 @@ class LineMessageApiWebhookController(Resource):
                     ]
                 )
             )
-            flex_message = FlexSendMessage(
-                alt_text='hello',
-                contents=BubbleContainer(
-                    direction='ltr',
-                    hero=ImageComponent(
-                        url=f'{picture}.jpg',
-                        size='full',
-                        aspect_ratio='20:13',
-                        aspect_mode='cover',
-                        action=URIAction(
-                            uri='http://example.com', label='label')
-                    )
-                )
-            )
             self.line_bot_api.reply_message(token, buttons_template_message)
 
             # LINE reply Location message
