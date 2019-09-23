@@ -22,15 +22,46 @@ class RichmenuApiRelateController(Resource):
     def post(self):
         usage = request.args.get('usage')
         if usage == 'create':
-            rich_menu_to_create = RichMenu(
-                size=RichMenuSize(width=2500, height=843),
-                selected=False,
-                name="Nice richmenu",  # display name
-                chat_bar_text="我是測試使用",
-                areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
-                    bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
-                    action=URIAction(label='Go to line.me', uri='https://line.me'))]
-            )
+            rich_menu_to_create = None
+            if request.args.get('state') == 'up':
+                rich_menu_to_create = RichMenu(
+                    size=RichMenuSize(width=2500, height=843),
+                    selected=False,
+                    name="Nice richmenu",  # display name
+                    chat_bar_text="我是第一頁",
+                    areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
+                        bounds=RichMenuBounds(
+                            x=0, y=0, width=2500, height=843),
+                        action=MessageAction(
+                            label='message',
+                            text='下一頁'
+                        ))]
+                )
+            elif request.args.get('state') == 'down':
+                rich_menu_to_create = RichMenu(
+                    size=RichMenuSize(width=2500, height=843),
+                    selected=False,
+                    name="Nice richmenu",  # display name
+                    chat_bar_text="我是第二頁",
+                    areas=[RichMenuArea(
+                        bounds=RichMenuBounds(
+                            x=0, y=0, width=2500, height=843),
+                        action=MessageAction(
+                            label='message',
+                            text='上一頁'
+                        ))]
+                )
+            else:
+                rich_menu_to_create = RichMenu(
+                    size=RichMenuSize(width=2500, height=843),
+                    selected=False,
+                    name="Nice richmenu",  # display name
+                    chat_bar_text="我是測試使用",
+                    areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
+                        bounds=RichMenuBounds(
+                            x=0, y=0, width=2500, height=843),
+                        action=URIAction(label='Go to line.me', uri='https://line.me'))]
+                )
             rich_menu_id = self.line_bot_api.create_rich_menu(
                 rich_menu=rich_menu_to_create)
             print(rich_menu_id)
@@ -50,7 +81,8 @@ class RichmenuApiRelateController(Resource):
             rich_menu_id = request.form['richmenu_id']
             try:
                 self.line_bot_api.set_default_rich_menu(rich_menu_id)
-            except:
+            except Exception as e:
+                print(e)
                 raise BadRequest("Maybe your richmenu id error.")
             return {'result': f'{rich_menu_id} set default ok!'}, 200
         elif usage == 'get':

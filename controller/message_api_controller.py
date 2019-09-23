@@ -60,30 +60,48 @@ class LineMessageApiWebhookController(Resource):
             except Exception as e:
                 print(e)
                 pass
-            buttons_template_message = TemplateSendMessage(
-                alt_text='Buttons template',
-                template=ButtonsTemplate(
-                    thumbnail_image_url=f'{picture}.jpg',
-                    title='Menu',
-                    text='Please select',
-                    actions=[
-                        PostbackAction(
-                            label='postback',
-                            display_text='postback text',
-                            data='action=buy&itemid=1'
-                        ),
-                        MessageAction(
-                            label='message',
-                            text='message text'
-                        ),
-                        URIAction(
-                            label='uri',
-                            uri='http://example.com/'
-                        )
-                    ]
-                )
-            )
-            self.line_bot_api.reply_message(token, buttons_template_message)
+            message = event['events'][0]['message']['text']
+            if message == "上一頁" or message == "下一頁":
+                try:
+                    rich_menu_id = self.line_bot_api.get_rich_menu_id_of_user(
+                        id)
+                except:
+                    # link default rich menu
+                    self.line_bot_api.link_rich_menu_to_user(
+                        id, "richmenu-269cc28b8e8497d76c2df062b274a2ce")
+                if rich_menu_id == "richmenu-269cc28b8e8497d76c2df062b274a2ce":
+                    self.line_bot_api.link_rich_menu_to_user(
+                        id, "richmenu-e31be74ad7e577b4752ab70c9c2a3fba")
+                else:
+                    self.line_bot_api.link_rich_menu_to_user(
+                        id, "richmenu-269cc28b8e8497d76c2df062b274a2ce")
+            else:
+                self.line_bot_api.reply_message(token, TextSendMessage(
+                    text=message))
+            # buttons_template_message = TemplateSendMessage(
+            #     alt_text='Buttons template',
+            #     template=ButtonsTemplate(
+            #         thumbnail_image_url=f'{picture}.jpg',
+            #         title='Menu',
+            #         text='Please select',
+            #         actions=[
+            #             PostbackAction(
+            #                 label='postback',
+            #                 display_text='postback text',
+            #                 data='action=buy&itemid=1'
+            #             ),
+            #             MessageAction(
+            #                 label='message',
+            #                 text='message text'
+            #             ),
+            #             URIAction(
+            #                 label='uri',
+            #                 uri='http://example.com/'
+            #             )
+            #         ]
+            #     )
+            # )
+            # self.line_bot_api.reply_message(token, buttons_template_message)
 
             # LINE reply Location message
             # self.line_bot_api.reply_message(token, LocationSendMessage(
