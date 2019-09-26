@@ -3,32 +3,47 @@ provider:
   name: aws
   runtime: python3.7
   region: ${env:REGION}
-  stage: dev
+  stage: ${opt:stage, 'dev'}
+  timeout: 20
   iamRoleStatements:
     - Effect: Allow
       Action:
         - sqs:SendMessage
       Resource:
         - ${env:SQS_ARN}
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-dotenv-plugin
+  - serverless-domain-manager
+
 functions:
   line_notify:
     handler: consumer/notify_handler.line_notify_handler
     events:
       - sqs: ${env:SQS_ARN}
-
+  line_bot_alert:
+    handler: consumer/line_bot_alert_handler.alert_handler
+    events:
+      - schedule: rate(1 minute)
+      - schedule: "cron(0/5 0-12 ? * MON-FRI *)"
   api:
     handler: wsgi_handler.handler
     events:
       - http: ANY /
       - http: ANY {proxy+}
-
 custom:
   pythonRequirements:
     dockerizePip: true
   wsgi:
     app: api.app
-
-plugins:
-  - serverless-python-requirements
-  - serverless-wsgi
-  - serverless-dotenv-plugin
+  customDomain: ${self:custom.domainName.${self:provider.stage}}
+  domainName:
+    default:
+      domainName: ${self:provider.stage}.nijialin.com
+      basePath: ""
+      stage: ${self:provider.stage}
+      certificateName: "*.nijialin.com"
+      createRoute53Record: true
+      endpointType: edge
+    dev: ${self:custom.domainName.default}
