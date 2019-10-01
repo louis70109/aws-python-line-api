@@ -3,12 +3,11 @@
   "description": "",
   "version": "0.1.0",
   "dependencies": {
-    "serverless": "^1.52.2"
+    "serverless": "^1.53.0"
   },
   "devDependencies": {
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-python-requirements": "^5.0.0",
-    "serverless-wsgi": "^1.7.3",
-    "serverless-domain-manager": "^3.3.0"
+    "serverless-wsgi": "^1.7.3"
   }
 }

@@ -1,7 +1,8 @@
 import json
 import requests
 
-
+from lib.decorator import lambda_warm_up
+@lambda_warm_up
 def alert_handler(event, context):
     air = requests.get(
         'http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$skip=0&$top=1000&format=json')

@@ -20,3 +20,4 @@ __pycache__
 .serverless
 serverless.yml
 .env
+.idea/

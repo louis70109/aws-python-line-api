@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>LINE Login</title>
+  </head>
+  <body>
+    <button class="auth" onclick="auth()">LINE LOGIN</button>
+
+  </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script>
+      function auth() {
+        $.ajax({
+          url: "https://fu2eps8jsj.execute-api.us-east-1.amazonaws.com/dev/line/auth",
+          method: "POST",
+          success: function(data) {
+            window.location.replace(data.result);
+          }
+        });
+      }
+    </script>
+</html>

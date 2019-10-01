@@ -11,22 +11,30 @@ provider:
         - sqs:SendMessage
       Resource:
         - ${env:SQS_ARN}
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+      Resource:
+        - Fn::Join:
+            - ":"
+            - - arn:aws:lambda
+              - Ref: AWS::Region
+              - Ref: AWS::AccountId
+              - function:*
 plugins:
   - serverless-python-requirements
   - serverless-wsgi
   - serverless-dotenv-plugin
-  - serverless-domain-manager
-
+#  - serverless-domain-manager
 functions:
   line_notify:
     handler: consumer/notify_handler.line_notify_handler
     events:
       - sqs: ${env:SQS_ARN}
-  line_bot_alert:
-    handler: consumer/line_bot_alert_handler.alert_handler
-    events:
-      - schedule: rate(1 minute)
-      - schedule: "cron(0/5 0-12 ? * MON-FRI *)"
+  # line_bot_alert:
+  #   handler: consumer/line_bot_alert_handler.alert_handler
+  #   events:
+  #     - schedule: rate(1 minute)
   api:
     handler: wsgi_handler.handler
     events:
@@ -37,13 +45,13 @@ custom:
     dockerizePip: true
   wsgi:
     app: api.app
-  customDomain: ${self:custom.domainName.${self:provider.stage}}
-  domainName:
-    default:
-      domainName: ${self:provider.stage}.nijialin.com
-      basePath: ""
-      stage: ${self:provider.stage}
-      certificateName: "*.nijialin.com"
-      createRoute53Record: true
-      endpointType: edge
-    dev: ${self:custom.domainName.default}
+#  customDomain: ${self:custom.domainName.${self:provider.stage}}
+#  domainName:
+#    default:
+#      domainName: ${self:provider.stage}.${env:DOMAIN}
+#      basePath: ""
+#      stage: ${self:provider.stage}
+#      certificateName: "*.${env:DOMAIN}"
+#      createRoute53Record: true
+#      endpointType: edge
+#    dev: ${self:custom.domainName.default}
