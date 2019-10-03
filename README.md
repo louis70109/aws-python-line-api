@@ -1,21 +1,22 @@
 # Aws-python-line-api
 
-# Bebore you start
+## Introduction
+This is a sample using `Serverless` framework to build `LINE` services in `AWS` project, if you like this, please star me :) 
 
-- LINE Notify service
+## Bebore you start
 
-- Need create a S3 Bucket
+- LINE account
+    - Notify
+    - Login
+    - Message api
+    - LIFF
+    - Love
+- AWS account
+    - Secret key
+    - create a S3 Bucket
+    - Love
 
-  - replace `views/notify_index.html` **YOUR_CLIENT_ID** & **YOUR_REDIRECT_URI** to your LINE notify settings
-  - replace `views/notify_confirm.html` SLS_URI to your **DEPLOY domain**
-  - upload both of views/ file to S3 Bucket
-
-- Replace `controller/notify_controller.py` to your LINE notify settings
-  - YOUR_REDIRECT_URI
-  - YOUR_CLIENT_ID
-  - YOUR_CLIENT_SECRET
-
-# Quick Start
+## Quick Start
 
 1. Install serverless via npm
 
@@ -37,7 +38,7 @@ $ serverless install --url https://github.com/louis70109/aws-python-line-notify-
 $ cd <YOUR_FILE_NAME>/
 ```
 
-4. create a `.env` file and write your key in this file
+4. create a `.env` file and input your service key in this file
 
 ```
 NOTIFY_REDIRECT_URI=
@@ -53,6 +54,9 @@ PG_PWD=
 PG_PORT=
 LINE_CHANNEL_TOKEN=
 LINE_CHANNEL_SECRET_KEY=
+LINE_LOGIN_CLIENT_ID=
+LINE_LOGIN_SECRET=
+LINE_LOGIN_URI=
 ```
 
 5. Deploy the webhook function
@@ -68,6 +72,6 @@ Then you can get notify access_token in `notify_confirm's` page :)
 
 If any question you can send issue for me !
 
-# License
+## License
 
 MIT

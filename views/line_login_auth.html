@@ -7,18 +7,17 @@
   </head>
   <body>
     <button class="auth" onclick="auth()">LINE LOGIN</button>
-
   </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-    <script>
-      function auth() {
-        $.ajax({
-          url: "https://fu2eps8jsj.execute-api.us-east-1.amazonaws.com/dev/line/auth",
-          method: "POST",
-          success: function(data) {
-            window.location.replace(data.result);
-          }
-        });
-      }
-    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+  <script>
+    function auth() {
+      $.ajax({
+        url: "http://YOUR_SERVERLESS_DOMAIN/line/auth",
+        method: "POST",
+        success: function(data) {
+          window.location.replace(data.result);
+        }
+      });
+    }
+  </script>
 </html>
