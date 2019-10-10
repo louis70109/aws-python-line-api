@@ -25,7 +25,7 @@ plugins:
   - serverless-python-requirements
   - serverless-wsgi
   - serverless-dotenv-plugin
-#  - serverless-domain-manager
+  - serverless-domain-manager
 functions:
   line_notify:
     handler: consumer/notify_handler.line_notify_handler
@@ -45,13 +45,12 @@ custom:
     dockerizePip: true
   wsgi:
     app: api.app
-#  customDomain: ${self:custom.domainName.${self:provider.stage}}
-#  domainName:
-#    default:
-#      domainName: ${self:provider.stage}.${env:DOMAIN}
-#      basePath: ""
-#      stage: ${self:provider.stage}
-#      certificateName: "*.${env:DOMAIN}"
-#      createRoute53Record: true
-#      endpointType: edge
-#    dev: ${self:custom.domainName.default}
+  customDomain: ${self:custom.domainName.${self:provider.stage}}
+  domainName:
+    default:
+      domainName: line.nijialin.com
+      stage: ${self:provider.stage}
+      certificateName: "*.nijialin.com"
+      createRoute53Record: true
+      endpointType: edge
+    dev: ${self:custom.domainName.default}
