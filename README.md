@@ -67,6 +67,8 @@ pip install -r requirements.txt
 serverless deploy
 ```
 
+6. Move `views/` files in S3
+
 Now you can open `notify_index.html` url (in S3) and click button to connect LINE notify service,
 Then you can get notify access_token in `notify_confirm's` page :)
 
