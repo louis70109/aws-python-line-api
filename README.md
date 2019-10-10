@@ -1,20 +1,22 @@
 # Aws-python-line-api
 
 ## Introduction
-This is a sample using `Serverless` framework to build `LINE` services in `AWS` project, if you like this, please star me :) 
+
+This is a sample using `Serverless` framework to build `LINE` services in `AWS` project, if you like this, please star me :)
 
 ## Bebore you start
 
 - LINE account
-    - Notify
-    - Login
-    - Message api
-    - LIFF
-    - Love
+  - Notify
+  - Login
+  - Message api
+  - LIFF
+  - Love
 - AWS account
-    - Secret key
-    - create a S3 Bucket
-    - Love
+  - Secret key
+  - create a S3 Bucket
+  - Route 53 domain
+  - Love
 
 ## Quick Start
 
@@ -59,7 +61,10 @@ LINE_LOGIN_SECRET=
 LINE_LOGIN_URI=
 ```
 
-5. Deploy the webhook function
+5. change domain name
+   Open `serverless.yml` and roll down, change `domainName` and `cdrtificateName` to your AWS settings(Route53 and Certificate Manager).
+
+6. Deploy the webhook function
 
 ```bash=
 npm install
@@ -67,12 +72,15 @@ pip install -r requirements.txt
 serverless deploy
 ```
 
-6. Move `views/` files in S3
+7. Move `views/` files in S3
 
 Now you can open `notify_index.html` url (in S3) and click button to connect LINE notify service,
 Then you can get notify access_token in `notify_confirm's` page :)
 
-If any question you can send issue for me !
+- LIFF settings can reference my [2019_it30-day23](https://github.com/louis70109/2019_it30/tree/master/day24)
+  If any question you can send issue for me !
+
+> This project is created by IThome 30 days challenge [repository](https://ithelp.ithome.com.tw/users/20111481/ironman/2475)'s example.
 
 ## License
 
